@@ -1,0 +1,35 @@
+{
+  "name": "simple-static-website-deployment-on-aws",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Shuo Feng",
+  "license": "ISC",
+  "main": "./lib/index.js",
+  "scripts": {
+    "build": "yarn clean && tsc -p ./tsconfig.json",
+    "clean": "(rm -rf ./lib || true) && (rm -rf ./cdk.out || true) && (rm -rf ./yarn-error.log || true)",
+    "clean:hard": "yarn run clean && (rm -rf ./node_modules || true) && (rm -rf cdk.context.json || true)",
+    "bootstrap": "cdk bootstrap",
+    "deploy-web:alpha": "cross-env NODE_ENV=alpha cdk deploy --app 'ts-node bin/deploy-static-website.ts'",
+    "deploy-web:prod": "cross-env NODE_ENV=prod cdk deploy --app 'ts-node bin/deploy-static-website.ts'"
+  },
+  "dependencies": {
+    "@aws-cdk/aws-certificatemanager": "1.180.0",
+    "@aws-cdk/aws-cloudfront": "1.180.0",
+    "@aws-cdk/aws-iam": "1.180.0",
+    "@aws-cdk/aws-route53": "1.180.0",
+    "@aws-cdk/aws-route53-targets": "1.180.0",
+    "@aws-cdk/aws-s3": "1.180.0",
+    "@aws-cdk/aws-s3-deployment": "1.180.0",
+    "@aws-cdk/core": "1.180.0",
+    "aws-cdk": "1.180.0",
+    "dotenv": "^16.0.3",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.0",
+    "cross-env": "^7.0.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.5"
+  }
+}
